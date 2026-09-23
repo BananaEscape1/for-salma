@@ -291,19 +291,19 @@ function initAct6(containerId) {
 
     `I've always kept a careful distance from the world. Not out of coldness — out of something quieter than fear but just as limiting. Most people I've met, I've kept at arm's length without ever quite deciding to. The kind of closeness where boundaries stop applying, where someone sees you fully and you let them — that used to shake me. And then there's you. Because of you I felt a whirlwind of things I didn't even know I was capable of feeling. Things I hadn't given myself permission to feel before. And somehow, impossibly, none of it frightened me. With you it just felt like finally exhaling after holding my breath for a very long time.`,
 
-    `Someone once said all it takes is twenty seconds of insane bravery for something great to follow. I think about that a lot. I think about how close I was to you that day without knowing it — ten minutes, just ten minutes — and how completely ordinary I felt walking in, and how nothing has been ordinary since. I didn't run to you. I didn't know I should have. But something in me recognized you before my brain caught up, reached out its hand before I'd made a conscious decision to, and refused to let the moment end even one second before it had to.`,
 
     `When I looked at you, the noise just stopped. Everything did. And in that quiet, one thought rose up so clearly it felt like it had always been there waiting: I WANT MORE. More time. More of her. The privilege — and I mean that word precisely — of simply being somewhere in her orbit. I walked out of that room already changed and had no idea.`,
+    `When I looked at you, the noise just stopped. Everything did. And in that quiet, one thought rose up so clearly it felt like it had always been there waiting: I want more. More time. More of her. The privilege — and I mean that word precisely — of simply being somewhere in her orbit. I walked out of that room already changed and had no idea.`,
 
     `I've loved listening to you this year more than I know how to say. Not just what you say — though that has undone me more times than I can count — but the way you say it. The way your laugh arrives before you've decided to let it, like it couldn't wait for permission. The way your smile does something to the weight of a room even through a screen, even across all the distance between us. I have spent this entire year being quietly wrecked by these things, and I would not change a single second of it.`,
 
     `But here is what I didn't expect: I didn't expect to love you more after the hard parts. I thought love was something you kept safe from difficulty — something fragile you protected so it wouldn't get scratched. I was wrong. Every fight we had, every misunderstanding that sat between us longer than it should have, every moment we discovered something about each other that neither of us quite knew how to hold yet — none of it made me love you less. Not once. Every single time, when the dust settled and I looked across at you, there was just *more.* More certainty. More depth. More of whatever this is that I don't have a word big enough for. Every hard thing we came through didn't diminish what we have — it proved it.`,
+    `But here is what I didn't expect: I didn't expect to love you more after the hard parts. I thought love was something you kept safe from difficulty — something fragile you protected so it wouldn't get scratched. I was wrong. Every fight we had, every misunderstanding that sat between us longer than it should have, every moment we discovered something about each other that neither of us quite knew how to hold yet — none of it made me love you less. Not once. Every single time, when the dust settled and I looked across at you, there was just more. More certainty. More depth. More of whatever this is that I don't have a word big enough for. Every hard thing we came through didn't diminish what we have — it proved it.`,
 
     `You are one of the strongest people I have ever known, and somehow also the most precious thing I have ever been trusted with. I don't take that lightly. I don't think I ever will.`,
 
     `You came in and shattered the way I saw the world. Not violently — gently, the way light fills a room without asking. I didn't notice it happening and then one day everything looked different and I couldn't remember what it had looked like before. I don't want to remember. That version of the world, the one without you in it, holds nothing for me now.`,
 
-    `And somewhere in the middle of all of it, a question started living in me that hasn't left since: *what can I do for you? How many ways can I make you smile?* It's not a debt I'm trying to repay — it's just what you awakened in me. You've done more for me than you probably realize, and the only answer I've found is to keep showing up, keep learning you, keep finding new ways to make you feel everything you've made me feel.`,
 
     `So here is what I want to say, on this day, a year from that afternoon when everything quietly changed: I am not afraid of what we still don't know about each other. I am not afraid of the next fight, the next discovery, the next thing that tests us and makes us figure each other out all over again. I am looking forward to all of it — every new version of you I haven't met yet, every layer we haven't reached, every moment that will teach me how to love you in some way I don't know about yet. The more time I spend with you, the more I learn about you — it only deepens it. It always has. I don't think it's going to stop.`,
 
@@ -311,7 +311,6 @@ function initAct6(containerId) {
 
     `I chose you a year ago. I choose you today. And I will choose you every year that follows, for as long as you'll have me.`,
   ];
-
   /* ══════════════════════════════
      TYPEWRITER
   ══════════════════════════════ */
