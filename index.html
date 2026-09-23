@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>♥ For My Salsa ♥</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700&family=Dancing+Script:wght@600&family=Fredoka+One&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- ── DISSOLVE LAYER ── -->
+<div id="dissolve"></div>
+
+<!-- ── WRONG PASSCODE OVERLAY ── -->
+<div id="wrong-overlay">
+
+  <div class="wrong-bg-deco" aria-hidden="true">
+    <span>♥</span><span>♥</span><span>♡</span><span>✦</span>
+    <span>♥</span><span>✿</span><span>♥</span><span>♡</span>
+  </div>
+
+  <div class="wrong-arc">
+    <svg viewBox="0 0 320 90" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <path id="arc-path" d="M 20,80 Q 160,-20 300,80"/>
+      </defs>
+      <text font-family="'Fredoka One',cursive" font-size="30"
+            fill="#e8547a" letter-spacing="3">
+        <textPath href="#arc-path" startOffset="50%"
+                  text-anchor="middle">WRONG PASSCODE!</textPath>
+      </text>
+    </svg>
+  </div>
+
+  <img class="wrong-gif" src="Img/stitch-silly.gif" alt="oops" />
+
+  <div class="wrong-hearts">
+    <span>♥</span><span>♥</span><span>♥</span>
+  </div>
+
+  <p class="wrong-hint" id="wrong-hint" aria-live="polite"></p>
+
+  <button class="wrong-btn" id="try-again-btn">TRY AGAIN</button>
+</div>
+
+<!-- ── ACT 1: PASSCODE ── -->
+<div id="act-1" class="act active">
+
+  <!-- floating background decorations -->
+  <div class="bg-deco" id="bg-deco"></div>
+
+  <div class="pc-layout">
+
+    <!-- TOP: GIF illustration -->
+    <div class="pc-top">
+      <div class="pc-bear-frame">
+        <img src="Img/lilo-and-stitch-couple.gif" alt="us" />
+      </div>
+    </div>
+
+    <!-- BOTTOM: keypad -->
+    <div class="pc-bottom">
+      <p class="pc-title">Enter The Date That Started It All</p>
+
+      <div class="pc-display">
+        <span class="pc-dot" id="d0"></span>
+        <span class="pc-dot" id="d1"></span>
+        <span class="pc-dot" id="d2"></span>
+        <span class="pc-dot" id="d3"></span>
+      </div>
+
+      <div id="pc-error" class="pc-error"></div>
+
+      <div class="pc-grid">
+        <button class="pc-btn" data-n="1">1</button>
+        <button class="pc-btn" data-n="2">2</button>
+        <button class="pc-btn" data-n="3">3</button>
+        <button class="pc-btn" data-n="4">4</button>
+        <button class="pc-btn" data-n="5">5</button>
+        <button class="pc-btn" data-n="6">6</button>
+        <button class="pc-btn" data-n="7">7</button>
+        <button class="pc-btn" data-n="8">8</button>
+        <button class="pc-btn" data-n="9">9</button>
+        <button class="pc-btn pc-btn--empty"></button>
+        <button class="pc-btn" data-n="0">0</button>
+        <button class="pc-btn pc-btn--del" id="pc-del">⌫</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- OTHER ACTS -->
+<div id="act-2" class="act"></div>
+<div id="act-3" class="act"></div>
+<div id="act-4" class="act"></div>
+<div id="act-5" class="act"></div>
+<div id="act-6" class="act"></div>
+
+<script src="js/passcode.js"></script>
+<script src="js/matrix.js"></script>
+<script src="js/act3.js"></script>
+<script src="js/act4.js"></script>
+<script src="js/act5.js"></script>
+<script src="js/act6.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
