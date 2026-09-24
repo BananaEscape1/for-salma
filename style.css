@@ -363,3 +363,76 @@ html, body {
   80%      { transform: translateX(8px); }
 }
 .shake { animation: shake 0.4s ease; }
+/* ══════════════════════════════
+   MOBILE — core fixes
+══════════════════════════════ */
+@media (max-width: 600px) {
+
+  /* Act 1 — passcode */
+  .pc-bear-frame {
+    width: 180px;
+    height: 160px;
+  }
+  .pc-btn {
+    width: 58px;
+    height: 58px;
+    font-size: 20px;
+  }
+  .pc-grid { gap: 8px; }
+  .pc-bottom { gap: 10px; }
+
+  /* Act 2 — matrix */
+  #act-2 canvas {
+    touch-action: none;
+  }
+
+  /* Act 3 — arrow scene */
+  #act3-heart-target {
+    font-size: 80px;
+    top: 10%;
+  }
+  #act3-bow-wrap { width: 75px; bottom: 36px; }
+  #act3-arrow    { bottom: 170px; }
+  .act3-main     { font-size: 52px; }
+  .act3-tagline  { font-size: 14px; }
+
+  /* Act 4 — dialog + meter */
+  #act4-dialog   { width: 92vw; }
+  .a4-question   { font-size: 14px; }
+  #a4-yes, #a4-no { font-size: 17px; padding: 9px 28px; }
+  #meter-canvas  { width: 260px !important; height: 150px !important; }
+  .meter-title   { font-size: 18px; }
+
+  /* Act 5 — gift grid */
+  #act5-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    max-width: 340px;
+  }
+  .a5-gift img {
+    width: 80px;
+    height: 80px;
+  }
+  #act5-scroll   { padding: 20px 16px 28px; }
+  .a5-confession { font-size: 13px; }
+  .a5-player     { padding: 16px; }
+
+  /* Act 6 — letter */
+  #act6-content  { padding: 32px 16px 60px; }
+  #act6-scroll   { padding: 24px 18px 28px; }
+  #act6-letter   { font-size: 14px; line-height: 1.8; }
+  .a6-love       { font-size: 26px; }
+  .a6-anniversary { font-size: 18px; }
+}
+
+/* prevent zoom on input tap — iOS */
+input, button, select {
+  font-size: 16px !important;
+  touch-action: manipulation;
+}
+
+/* smooth scrolling everywhere */
+* { -webkit-overflow-scrolling: touch; }
+
+/* prevent horizontal scroll */
+body { overflow-x: hidden; }
