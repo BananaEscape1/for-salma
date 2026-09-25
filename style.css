@@ -19,6 +19,7 @@
 ══════════════════════════════ */
 html, body {
   height: 100%;
+  min-height: 100dvh;
   width: 100%;
   overflow: hidden;
   background: var(--dark);
@@ -32,6 +33,7 @@ html, body {
 .act {
   position: fixed;
   inset: 0;
+  min-height: 100dvh;
   display: flex;
   align-items: center;
   justify-content: center;

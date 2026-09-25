@@ -70,7 +70,8 @@ function initAct4(containerId, onDone) {
   const style = document.createElement('style');
   style.textContent = `
   #act4-scene {
-    position: absolute; inset: 0;
+    position: fixed; inset: 0;
+    min-height: 100dvh;
     background-color: #f7b8c8;
     background-image:
       linear-gradient(90deg, rgba(255,255,255,.22) 50%, transparent 50%),
