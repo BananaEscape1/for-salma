@@ -354,12 +354,12 @@ function initAct6(containerId) {
     typeChar();
   }
 
-  /* speed: faster for longer paragraphs */
+  /* speed: comfortable reading pace for tablet */
   function getDelay() {
     const len = PARAGRAPHS[paraIndex]?.length || 100;
-    if (len > 400) return 12;
-    if (len > 200) return 16;
-    return 22;
+    if (len > 400) return 28;
+    if (len > 200) return 34;
+    return 40;
   }
 
   function typeChar() {
