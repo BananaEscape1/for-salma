@@ -686,7 +686,7 @@ Please take your time to think it over; I'm not expecting an answer right away. 
       this one's ours now.
     </p>
     <div class="a5-player">
-      <audio id="a5-audio" src="Audio/song.mp3" preload="auto"></audio>
+      <audio id="a5-audio" src="Audio/song.mp3" preload="metadata"></audio>
       <div class="a5-album-art-wrap">
         <img class="a5-album-art-full" src="Img/SKZ.png" alt="Album cover" />
       </div>
