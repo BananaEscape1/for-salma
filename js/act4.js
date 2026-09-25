@@ -72,10 +72,10 @@ function initAct4(containerId, onDone) {
   #act4-scene {
     position: fixed; inset: 0;
     min-height: 100dvh;
-    background-color: #f7b8c8;
+    background-color: #ffadc8;
     background-image:
-      linear-gradient(90deg, rgba(255,255,255,.22) 50%, transparent 50%),
-      linear-gradient(rgba(255,255,255,.22) 50%, transparent 50%);
+      linear-gradient(90deg, rgba(255,255,255,.28) 50%, transparent 50%),
+      linear-gradient(rgba(255,255,255,.28) 50%, transparent 50%);
     background-size: 28px 28px;
     display: flex; align-items: center; justify-content: center;
     overflow: hidden;
