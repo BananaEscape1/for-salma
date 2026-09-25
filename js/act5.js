@@ -601,11 +601,7 @@ function initAct5(containerId, onDone) {
     const panel = document.getElementById('act5-panel');
     panel.classList.remove('visible');
     const audio = document.getElementById('a5-audio');
-    if (audio && !audio.paused) {
-      audio.pause();
-      // Resume bg music when navigating back
-      if (typeof BG !== 'undefined') BG.resume();
-    }
+    if (audio) audio.pause();
     setTimeout(() => panel.classList.add('hidden'), 450);
   });
 
@@ -819,37 +815,19 @@ Please take your time to think it over; I'm not expecting an answer right away. 
       const m = Math.floor(s/60);
       return `${m}:${Math.floor(s%60).toString().padStart(2,'0')}`;
     }
-
     audio.addEventListener('loadedmetadata', () => { durEl.textContent = fmt(audio.duration); });
     audio.addEventListener('timeupdate', () => {
       if (!audio.duration) return;
       fill.style.width  = (audio.currentTime / audio.duration * 100) + '%';
       curEl.textContent = fmt(audio.currentTime);
     });
-    audio.addEventListener('ended', () => {
-      playBtn.textContent = '▶';
-      // Resume bg music when song ends
-      if (typeof BG !== 'undefined') BG.resume();
-    });
-
+    audio.addEventListener('ended', () => { playBtn.textContent = '▶'; });
     playBtn.addEventListener('click', () => {
-      if (audio.paused) {
-        // Pause bg music before playing the song
-        if (typeof BG !== 'undefined') BG.pause();
-        audio.play().then(() => {
-          playBtn.textContent = '⏸';
-        }).catch(() => {});
-      } else {
-        audio.pause();
-        playBtn.textContent = '▶';
-        // Resume bg music when song is paused
-        if (typeof BG !== 'undefined') BG.resume();
-      }
+      if (audio.paused) { audio.play(); playBtn.textContent = '⏸'; }
+      else              { audio.pause(); playBtn.textContent = '▶'; }
     });
-
     bar.addEventListener('click', e => {
       const rect = bar.getBoundingClientRect();
-      if (!audio.duration) return;
       audio.currentTime = ((e.clientX - rect.left) / rect.width) * audio.duration;
     });
     rewBtn.addEventListener('click', () => { audio.currentTime = 0; });
