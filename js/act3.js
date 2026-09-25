@@ -459,6 +459,33 @@ function initAct3(containerId, onDone) {
     updateArrowPosition();
   }
 
+  // ── Reveal: extracted so it can be called on first load AND after a miss ──
+  function reveal() {
+    // Reset bow to exact CSS default (no inline transform override)
+    bow.style.transform = '';
+    bow.style.opacity   = '';
+    bow.classList.add('visible');
+
+    // Reset arrow to CSS default position, hidden first
+    arrow.style.position  = 'absolute';
+    arrow.style.left      = '';
+    arrow.style.top       = '';
+    arrow.style.transform = '';
+    arrow.style.opacity   = '0';
+    arrow.style.transition = '';
+    arrow.classList.remove('arrow-flying', 'dragging');
+
+    heart.classList.add('visible');
+    instruction.classList.remove('hidden');
+    instruction.classList.add('visible');
+
+    // Let the bow render in its CSS position, then read it for arrow placement
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      placeArrowAtString();
+      arrow.style.opacity = '1';
+    }));
+  }
+
   function finishShot() {
     if (fired) return;
     fired = true;
@@ -467,52 +494,156 @@ function initAct3(containerId, onDone) {
     cancelAnimationFrame(pullFrame);
     scene.releasePointerCapture?.(activePointerId);
     arrow.classList.remove('dragging');
-
-    const arrowRect = arrow.getBoundingClientRect();
-    const heartRect = heart.getBoundingClientRect();
-    const sceneRect = scene.getBoundingClientRect();
-    const startX = arrowRect.left + arrowRect.width / 2;
-    const startY = arrowRect.top + arrowRect.height / 2;
-    const targetX = heartRect.left + heartRect.width / 2;
-    const targetY = heartRect.top + heartRect.height / 2;
-    const shotAngle = Math.atan2(targetY - startY, targetX - startX) * 180 / Math.PI;
-    const flightDuration = 560;
-    const flightStart = performance.now();
-
-    arrow.style.left = `${startX - sceneRect.left}px`;
-    arrow.style.top = `${startY - sceneRect.top}px`;
-    arrow.style.transform = `rotate(${shotAngle}deg)`;
     arrow.classList.add('arrow-flying');
 
-    function animateArrow(now) {
-      const progress = Math.min(1, (now - flightStart) / flightDuration);
-      const currentX = startX + (targetX - startX) * progress;
-      const currentY = startY + (targetY - startY) * progress;
-      arrow.style.left = `${currentX - sceneRect.left}px`;
-      arrow.style.top = `${currentY - sceneRect.top}px`;
-      arrow.style.opacity = String(1 - progress);
-      if (progress < 1) requestAnimationFrame(animateArrow);
+    // Nock position in VIEWPORT coords right now
+    const arrowRect = arrow.getBoundingClientRect();
+    const nockX = arrowRect.left + 13;
+    const nockY = arrowRect.top  +  9;
+
+    // Fly in aimAngle direction — no auto-aim
+    const rad      = aimAngle * Math.PI / 180;
+    const distance = Math.max(window.innerWidth, window.innerHeight) * 1.5;
+    const endX     = nockX + Math.cos(rad) * distance;
+    const endY     = nockY + Math.sin(rad) * distance;
+
+    // Does the ray pass through the heart?
+    const heartRect = heart.getBoundingClientRect();
+    const heartCX   = heartRect.left + heartRect.width  / 2;
+    const heartCY   = heartRect.top  + heartRect.height / 2;
+    const dx = endX - nockX, dy = endY - nockY;
+    const tHit = ((heartCX - nockX) * dx + (heartCY - nockY) * dy) / (dx * dx + dy * dy);
+    const closestX = nockX + tHit * dx;
+    const closestY = nockY + tHit * dy;
+    const hitsHeart = Math.hypot(closestX - heartCX, closestY - heartCY) < heartRect.width * 0.45
+                      && tHit > 0 && tHit < 1;
+
+    // Detach to body so viewport coords are clean
+    document.body.appendChild(arrow);
+    arrow.style.position   = 'fixed';
+    arrow.style.transition = 'none';
+    arrow.style.left       = `${nockX - 13}px`;
+    arrow.style.top        = `${nockY -  9}px`;
+    arrow.style.transform  = `rotate(${aimAngle}deg)`;
+    arrow.style.opacity    = '1';
+
+    bow.style.transition = 'opacity 0.3s ease';
+    bow.style.opacity    = '0';
+
+    const dur = 900, t0 = performance.now();
+    function fly(ts) {
+      const p    = Math.min(1, (ts - t0) / dur);
+      const ease = 1 - Math.pow(1 - p, 2);
+      arrow.style.left    = `${nockX + (endX - nockX) * ease - 13}px`;
+      arrow.style.top     = `${nockY + (endY - nockY) * ease -  9}px`;
+      arrow.style.opacity = String(1 - p * 0.85);
+      if (p < 1) requestAnimationFrame(fly);
     }
-    requestAnimationFrame(animateArrow);
+    requestAnimationFrame(fly);
 
-    setTimeout(() => {
-      heart.classList.remove('heart-pulse');
-      heart.classList.add('heart-hit');
-      bow.style.opacity = '0';
-
-      const rect = heart.getBoundingClientRect();
-      heartX = rect.left + rect.width / 2;
-      heartY = rect.top + rect.height / 2;
-      spawnBurst(heartX, heartY);
-      running = true;
-      drawParticles();
-
-      setTimeout(() => title.classList.add('visible'), 750);
+    if (hitsHeart) {
       setTimeout(() => {
-        running = false;
-        if (typeof onDone === 'function') onDone();
-      }, 5000);
-    }, 560);
+        heart.classList.remove('heart-pulse');
+        heart.classList.add('heart-hit');
+        const r = heart.getBoundingClientRect();
+        heartX = r.left + r.width  / 2;
+        heartY = r.top  + r.height / 2;
+        spawnBurst(heartX, heartY);
+        running = true;
+        drawParticles();
+        setTimeout(() => title.classList.add('visible'), 750);
+        setTimeout(() => { running = false; if (typeof onDone === 'function') onDone(); }, 5000);
+      }, Math.min(tHit * dur, dur - 50));
+    } else {
+      // Missed — show gif overlay, block scene interaction
+      setTimeout(() => {
+        // Put arrow back silently
+        scene.appendChild(arrow);
+        // NOTE: fired stays TRUE until Try Again is clicked
+        aiming       = false;
+        pullDistance = 0;
+        aimAngle     = 0;
+        updateString();
+
+        // Block the scene so the bow can't be drawn while overlay is up
+        scene.style.pointerEvents = 'none';
+
+        // Build miss overlay
+        const overlay = document.createElement('div');
+        overlay.id = 'act3-miss-overlay';
+        overlay.style.cssText = `
+          position: absolute;
+          inset: 0;
+          background: rgba(255, 240, 245, 0.93);
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          gap: 20px;
+          z-index: 20;
+          opacity: 0;
+          transition: opacity 0.4s ease;
+          pointer-events: all;
+        `;
+
+        const gif = document.createElement('img');
+        gif.src = 'Img/i-love-you-so-much-ily.gif';
+        gif.alt = 'cupid penguin';
+        gif.style.cssText = `
+          width: min(260px, 70vw);
+          border-radius: 20px;
+          box-shadow: 0 8px 32px rgba(232,84,122,0.3);
+        `;
+
+        const msg = document.createElement('p');
+        msg.textContent = 'oops! missed ♥';
+        msg.style.cssText = `
+          font-family: 'Dancing Script', cursive;
+          font-size: clamp(24px, 6vw, 34px);
+          color: #c4637e;
+          margin: 0;
+          text-shadow: 0 2px 8px rgba(255,255,255,0.8);
+        `;
+
+        const btn = document.createElement('button');
+        btn.textContent = 'Try Again ♥';
+        btn.style.cssText = `
+          background: #e8547a;
+          color: white;
+          border: none;
+          border-radius: 40px;
+          font-family: 'Fredoka One', cursive;
+          font-size: 22px;
+          padding: 14px 48px;
+          cursor: pointer;
+          box-shadow: 0 4px 20px rgba(232,84,122,0.4);
+          transition: transform 0.15s;
+          -webkit-tap-highlight-color: transparent;
+        `;
+        btn.addEventListener('pointerdown', () => btn.style.transform = 'scale(0.94)');
+        btn.addEventListener('pointerup',   () => btn.style.transform = 'scale(1)');
+        btn.addEventListener('click', () => {
+          overlay.style.opacity = '0';
+          scene.style.pointerEvents = 'all'; // re-enable scene
+          fired = false; // only NOW allow shooting again
+          setTimeout(() => {
+            overlay.remove();
+            reveal();
+          }, 400);
+        });
+
+        overlay.appendChild(gif);
+        overlay.appendChild(msg);
+        overlay.appendChild(btn);
+        scene.appendChild(overlay);
+
+        // Fade in overlay
+        requestAnimationFrame(() => requestAnimationFrame(() => {
+          overlay.style.opacity = '1';
+        }));
+
+      }, dur + 100);
+    }
   }
 
   let activePointerId = null;
@@ -522,7 +653,6 @@ function initAct3(containerId, onDone) {
     activePointerId = event.pointerId;
     scene.setPointerCapture(event.pointerId);
     arrow.classList.add('dragging');
-    const sceneRect = scene.getBoundingClientRect();
     setAim(event.clientX, event.clientY);
     const stringMidpoint = getStringMidpoint();
     baseNockX = stringMidpoint.x;
@@ -547,12 +677,6 @@ function initAct3(containerId, onDone) {
     if (aiming && event.pointerId === activePointerId) finishShot();
   });
 
-  // Reveal the target and bow; the user controls the shot.
-  setTimeout(() => {
-    bow.classList.add('visible');
-    heart.classList.add('visible');
-    arrow.classList.add('visible');
-    instruction.classList.add('visible');
-    requestAnimationFrame(placeArrowAtString);
-  }, 400);
+  // First load
+  setTimeout(() => reveal(), 400);
 }

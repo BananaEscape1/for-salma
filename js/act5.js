@@ -370,6 +370,35 @@ function initAct5(containerId, onDone) {
     font-size: 14px; color: rgba(255,255,255,0.4);
     text-align: center; margin-top: 10px;
   }
+  /* ── FULL-WIDTH ALBUM ART ── */
+.a5-album-art-wrap {
+  width: 100%;
+  margin-bottom: 16px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 28px rgba(232,84,122,0.4);
+}
+.a5-album-art-full {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+.a5-player-info-centered {
+  text-align: center;
+  margin-bottom: 16px;
+}
+.a5-player-info-centered .a5-song-name {
+  font-family: 'Fredoka One', cursive;
+  font-size: 19px;
+  color: white;
+}
+.a5-player-info-centered .a5-song-artist {
+  font-family: 'Nunito', sans-serif;
+  font-size: 13px;
+  color: rgba(255,255,255,0.5);
+  margin-top: 3px;
+}
 
   /* ── CONFESSION ── */
   .a5-confession {
@@ -650,38 +679,38 @@ Please take your time to think it over; I'm not expecting an answer right away. 
         </div>`;
 
       case 'firstsong': return `
-        <h2 class="a5-card-title">🎵 First Song</h2>
-        <span class="a5-memory-date">16 October 2024</span>
-        <div class="a5-card">
-          <p class="a5-card-body" style="margin-bottom:16px;">
-            this one's ours now.
-          </p>
-          <div class="a5-player">
-            <audio id="a5-audio" src="audio/song.mp3" preload="auto"></audio>
-            <div class="a5-player-top">
-              <img class="a5-album-art" src="Img/SKZ.png" alt="Album cover" />
-              <div class="a5-player-info">
-                <div class="a5-song-name">Neverending Story</div>
-                <div class="a5-song-artist">Stray Kids</div>
-              </div>
-            </div>
-            <div class="a5-progress-wrap">
-              <div class="a5-progress-bar" id="a5-progress-bar">
-                <div class="a5-progress-fill" id="a5-progress-fill"></div>
-              </div>
-              <div class="a5-time-row">
-                <span id="a5-current">0:00</span>
-                <span id="a5-duration">0:00</span>
-              </div>
-            </div>
-            <div class="a5-controls">
-              <button class="a5-ctrl-btn" id="a5-rew">⏮</button>
-              <button id="a5-play-btn">▶</button>
-              <button class="a5-ctrl-btn" id="a5-ffw">⏭</button>
-            </div>
-            <p class="a5-player-note">♥ a song that reminds me of us ♥</p>
-          </div>
-        </div>`;
+  <h2 class="a5-card-title">🎵 First Song</h2>
+  <span class="a5-memory-date">16 October 2024</span>
+  <div class="a5-card">
+    <p class="a5-card-body" style="margin-bottom:16px;">
+      this one's ours now.
+    </p>
+    <div class="a5-player">
+      <audio id="a5-audio" src="audio/song.mp3" preload="auto"></audio>
+      <div class="a5-album-art-wrap">
+        <img class="a5-album-art-full" src="Img/SKZ.png" alt="Album cover" />
+      </div>
+      <div class="a5-player-info-centered">
+        <div class="a5-song-name">Neverending Story</div>
+        <div class="a5-song-artist">Stray Kids</div>
+      </div>
+      <div class="a5-progress-wrap">
+        <div class="a5-progress-bar" id="a5-progress-bar">
+          <div class="a5-progress-fill" id="a5-progress-fill"></div>
+        </div>
+        <div class="a5-time-row">
+          <span id="a5-current">0:00</span>
+          <span id="a5-duration">0:00</span>
+        </div>
+      </div>
+      <div class="a5-controls">
+        <button class="a5-ctrl-btn" id="a5-rew">⏮</button>
+        <button id="a5-play-btn">▶</button>
+        <button class="a5-ctrl-btn" id="a5-ffw">⏭</button>
+      </div>
+      <p class="a5-player-note">♥ a song that reminds me of us ♥</p>
+    </div>
+  </div>`;
 
       case 'ngnlz': return `
         <h2 class="a5-card-title">🎬 First Movie Night</h2>
