@@ -23,7 +23,7 @@ function initMatrix(canvasId, onDone) {
 
   const WORDS       = ['YOU', 'ARE', 'MY', 'LOVE'];
   let   wordIndex   = 0;
-  const WORD_FONT   = Math.min(canvas.width * 0.52, 150);
+  const WORD_FONT   = Math.min(canvas.width *  0.28, 150);
   const HOLD_FRAMES = 55;
   const RAIN_FRAMES = 140;
 
@@ -201,7 +201,7 @@ function drawOverlay() {
   if (overlayOpacity < 1) overlayOpacity += 0.012;
 
   const alpha = Math.min(overlayOpacity, 1);
-  const fsize = Math.min(canvas.width / 7, 44);
+  const fsize = Math.min(canvas.width / 14, 36);
 
   ctx.save();
   ctx.globalAlpha  = alpha;
