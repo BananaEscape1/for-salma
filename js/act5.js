@@ -588,6 +588,7 @@ function initAct5(containerId, onDone) {
     requestAnimationFrame(() => panel.classList.add('visible'));
 
     if (gift.id === 'firstsong') initPlayer();
+    if (gift.id === 'days') initDaysCounter();
 
     if (opened.size === GIFTS.length) {
       setTimeout(() => {
@@ -772,7 +773,7 @@ Please take your time to think it over; I'm not expecting an answer right away. 
       case 'days': return `
         <h2 class="a5-card-title">📅 365 Days</h2>
         <div class="a5-card">
-          <div class="a5-days-num">365</div>
+          <div class="a5-days-num" id="a5-days-counter">0</div>
           <p class="a5-days-label">days of choosing each other</p>
           <p class="a5-days-sub">
             365 good mornings.<br>
@@ -797,6 +798,33 @@ Please take your time to think it over; I'm not expecting an answer right away. 
 
       default: return '';
     }
+  }
+
+  /* ── DAYS COUNTER ── */
+  function initDaysCounter() {
+    const el = document.getElementById('a5-days-counter');
+    if (!el) return;
+    const target   = 365;
+    const duration = 6000;
+    const start    = performance.now();
+
+    function tick(now) {
+      const elapsed  = now - start;
+      const progress = Math.min(elapsed / duration, 1);
+      const ease     = 1 - Math.pow(1 - progress, 1.5);
+      const current  = Math.floor(ease * target);
+      el.textContent = current;
+
+      if (progress < 1) {
+        requestAnimationFrame(tick);
+      } else {
+        el.textContent = target;
+        el.style.transition = 'transform 0.2s ease';
+        el.style.transform  = 'scale(1.15)';
+        setTimeout(() => { el.style.transform = 'scale(1)'; }, 200);
+      }
+    }
+    requestAnimationFrame(tick);
   }
 
   /* ── MUSIC PLAYER ── */

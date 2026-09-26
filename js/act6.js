@@ -333,11 +333,12 @@ function initAct6(containerId) {
 
   function nextPara() {
     if (paraIndex >= PARAGRAPHS.length) {
-      /* all paragraphs done — show signature */
+      /* all paragraphs done — show signature then launch hearts */
       if (cursor) cursor.remove();
       setTimeout(() => {
         sigEl.classList.remove('hidden');
         requestAnimationFrame(() => sigEl.classList.add('visible'));
+        launchHearts();
       }, 600);
       return;
     }
@@ -409,6 +410,44 @@ function initAct6(containerId) {
         nextPara();
       }, paraIndex < PARAGRAPHS.length ? 320 : 200);
     }
+  }
+
+  /* ── HEART BURST (fires when signature appears) ── */
+  function launchHearts() {
+    const HEART_COLORS = [
+      'rgba(232,84,122,',
+      'rgba(255,150,180,',
+      'rgba(180,140,255,',
+      'rgba(255,200,220,',
+      'rgba(255,100,150,',
+    ];
+
+    // Spawn waves of hearts over 4 seconds
+    let waveCount = 0;
+    const maxWaves = 8;
+
+    function spawnWave() {
+      const count = 6 + Math.floor(Math.random() * 5);
+      for (let i = 0; i < count; i++) {
+        particles.push({
+          x:    Math.random() * pCanvas.width,
+          y:    pCanvas.height + 20,
+          vy:   -(1.5 + Math.random() * 2.5),
+          vx:   (Math.random() - 0.5) * 1.2,
+          size: 14 + Math.random() * 22,
+          sym:  Math.random() > 0.3 ? '♥' : '♡',
+          op:   0.8 + Math.random() * 0.2,
+          dop:  -(0.004 + Math.random() * 0.003), // fade out only
+          color: HEART_COLORS[Math.floor(Math.random() * HEART_COLORS.length)]
+        });
+      }
+      waveCount++;
+      if (waveCount < maxWaves) {
+        setTimeout(spawnWave, 400 + Math.random() * 200);
+      }
+    }
+
+    spawnWave();
   }
 
   /* ── SEQUENCE ── */
