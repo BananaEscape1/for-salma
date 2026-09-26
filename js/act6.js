@@ -357,9 +357,9 @@ function initAct6(containerId) {
   /* speed: mobile-first comfortable pace */
   function getDelay() {
     const len = PARAGRAPHS[paraIndex]?.length || 100;
-    if (len > 400) return 22;
-    if (len > 200) return 28;
-    return 34;
+    if (len > 400) return 45;
+    if (len > 200) return 55;
+    return 65;
   }
 
   function typeChar() {
