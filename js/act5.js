@@ -822,6 +822,11 @@ Please take your time to think it over; I'm not expecting an answer right away. 
         el.style.transition = 'transform 0.2s ease';
         el.style.transform  = 'scale(1.15)';
         setTimeout(() => { el.style.transform = 'scale(1)'; }, 200);
+        // Explode hearts from the counter element
+        const rect = el.getBoundingClientRect();
+        const cx   = rect.left + rect.width  / 2;
+        const cy   = rect.top  + rect.height / 2;
+        spawnBurst(cx, cy);
       }
     }
     requestAnimationFrame(tick);
