@@ -2,15 +2,15 @@ function initAct5(containerId, onDone) {
   const el = document.getElementById(containerId);
 
   const GIFTS = [
-    { id: 'distance',    label: 'Gift 1', title: 'The Distance'        },
-    { id: 'firstmsg',   label: 'Gift 2', title: 'Where It Started'    },
-    { id: 'confession', label: 'Gift 3', title: 'The Confession'       },
-    { id: 'firstsong',  label: 'Gift 4', title: 'First Song'           },
-    { id: 'ngnlz',      label: 'Gift 5', title: 'First Movie Night'    },
-    { id: 'bf',         label: 'Gift 6', title: 'First Recommendation' },
-    { id: 'howl',       label: 'Gift 7', title: 'Our Comfort Movie'    },
-    { id: 'days',       label: 'Gift 8', title: '365 Days'             },
-    { id: 'whatyouare', label: 'Gift 9', title: 'What You Are'         },
+    { id: 'us',          label: 'Gift 1', title: 'Us'                  },
+    { id: 'biscuit',     label: 'Gift 2', title: 'The Biscuit'         },
+    { id: 'firstmsg',    label: 'Gift 3', title: 'Where It Started'    },
+    { id: 'confession',  label: 'Gift 4', title: 'The Confession'      },
+    { id: 'firstsong',   label: 'Gift 5', title: 'First Song'          },
+    { id: 'ngnlz',       label: 'Gift 6', title: 'First Movie Night'   },
+    { id: 'bf',          label: 'Gift 7', title: 'First Recommendation'},
+    { id: 'howl',        label: 'Gift 8', title: 'Our Comfort Movie'   },
+    { id: 'days',        label: 'Gift 9', title: '365 Days'           },
   ];
 
   const opened = new Set();
@@ -84,7 +84,7 @@ function initAct5(containerId, onDone) {
     text-shadow: 0 0 20px rgba(232,84,122,0.4); margin-bottom: 4px;
   }
 
-  /* ── GRID — 3 columns, 3 rows ── */
+  /* ── GRID — 3 columns ── */
   #act5-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -216,43 +216,6 @@ function initAct5(containerId, onDone) {
     color: rgba(255,255,255,0.8); text-align: center;
   }
 
-  /* ── DISTANCE ── */
-  .a5-map {
-    width: 100%; padding: 16px 0;
-    display: flex; flex-direction: column; align-items: center; gap: 4px;
-  }
-  .a5-map-row {
-    display: flex; align-items: center; gap: 12px; width: 100%; padding: 0 10px;
-  }
-  .a5-pin {
-    display: flex; flex-direction: column; align-items: center; gap: 4px;
-  }
-  .a5-pin-dot {
-    width: 14px; height: 14px; border-radius: 50%;
-    background: #e8547a; box-shadow: 0 0 10px rgba(232,84,122,0.8);
-  }
-  .a5-pin-label {
-    font-family: 'Nunito', sans-serif;
-    font-size: 13px; color: rgba(255,255,255,0.7); text-align: center;
-  }
-  .a5-dash-line {
-    flex: 1; border-top: 2px dashed rgba(232,84,122,0.4); position: relative;
-  }
-  .a5-dash-line::after {
-    content: '♥'; position: absolute; top: -11px; left: 50%;
-    transform: translateX(-50%); font-size: 14px; color: #e8547a;
-    text-shadow: 0 0 8px rgba(232,84,122,0.8);
-    animation: hbeat 1.5s ease-in-out infinite;
-  }
-  @keyframes hbeat {
-    0%,100% { transform: translateX(-50%) scale(1); }
-    50%      { transform: translateX(-50%) scale(1.3); }
-  }
-  .a5-distance-km {
-    font-size: 13px; color: rgba(255,255,255,0.4);
-    font-family: 'Nunito', sans-serif; margin-top: 8px;
-  }
-
   /* ── SCREENSHOT ── */
   .a5-screenshot {
     width: 100%; border-radius: 12px; overflow: hidden;
@@ -371,34 +334,34 @@ function initAct5(containerId, onDone) {
     text-align: center; margin-top: 10px;
   }
   /* ── FULL-WIDTH ALBUM ART ── */
-.a5-album-art-wrap {
-  width: 100%;
-  margin-bottom: 16px;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 8px 28px rgba(232,84,122,0.4);
-}
-.a5-album-art-full {
-  width: 100%;
-  height: auto;
-  display: block;
-  object-fit: cover;
-}
-.a5-player-info-centered {
-  text-align: center;
-  margin-bottom: 16px;
-}
-.a5-player-info-centered .a5-song-name {
-  font-family: 'Fredoka One', cursive;
-  font-size: 19px;
-  color: white;
-}
-.a5-player-info-centered .a5-song-artist {
-  font-family: 'Nunito', sans-serif;
-  font-size: 13px;
-  color: rgba(255,255,255,0.5);
-  margin-top: 3px;
-}
+  .a5-album-art-wrap {
+    width: 100%;
+    margin-bottom: 16px;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 8px 28px rgba(232,84,122,0.4);
+  }
+  .a5-album-art-full {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+  }
+  .a5-player-info-centered {
+    text-align: center;
+    margin-bottom: 16px;
+  }
+  .a5-player-info-centered .a5-song-name {
+    font-family: 'Fredoka One', cursive;
+    font-size: 19px;
+    color: white;
+  }
+  .a5-player-info-centered .a5-song-artist {
+    font-family: 'Nunito', sans-serif;
+    font-size: 13px;
+    color: rgba(255,255,255,0.5);
+    margin-top: 3px;
+  }
 
   /* ── CONFESSION ── */
   .a5-confession {
@@ -588,7 +551,7 @@ function initAct5(containerId, onDone) {
     requestAnimationFrame(() => panel.classList.add('visible'));
 
     if (gift.id === 'firstsong') initPlayer();
-    if (gift.id === 'days') initDaysCounter();
+    if (gift.id === 'days')     initDaysCounter();
 
     if (opened.size === GIFTS.length) {
       setTimeout(() => {
@@ -618,26 +581,33 @@ function initAct5(containerId, onDone) {
   function buildContent(id) {
     switch (id) {
 
-      case 'distance': return `
-        <h2 class="a5-card-title">🗺️ The Distance</h2>
+      case 'us': return `
+        <h2 class="a5-card-title">🎨 Us</h2>
         <div class="a5-card">
-          <div class="a5-map">
-            <div class="a5-map-row">
-              <div class="a5-pin">
-                <div class="a5-pin-dot"></div>
-                <div class="a5-pin-label">Cairo<br>🇪🇬</div>
-              </div>
-              <div class="a5-dash-line"></div>
-              <div class="a5-pin">
-                <div class="a5-pin-dot"></div>
-                <div class="a5-pin-label">Minya<br>🇪🇬</div>
-              </div>
-            </div>
-            <p class="a5-distance-km">~ 250 km apart</p>
+          <div class="a5-poster-wrap">
+            <img class="a5-poster" src="Img/us.png" alt="Us" style="width:100%;border-radius:16px;" />
+          </div>
+          <p class="a5-quote" style="margin-top:20px;">
+            you're my favorite <em>notification</em>,<br>
+            my <em>2am</em> safe place,<br>
+            my reason to smile<br>
+            at my phone like an idiot.<br><br>
+            you are, simply put,<br>
+            <em>my favorite person.</em>
+          </p>
+        </div>`;
+
+      case 'biscuit': return `
+        <h2 class="a5-card-title">🍪 The Biscuit</h2>
+        <div class="a5-card">
+          <div class="a5-screenshot" style="margin-bottom:16px;">
+            <img src="Img/biscuit.png" alt="The biscuit" />
           </div>
           <p class="a5-card-body">
-            not oceans, but still far enough<br>
-            to make every call feel like coming home.
+            You sent me this like it was nothing.<br><br>
+            I've had it saved as a favorite ever since.<br><br>
+            It's the smallest thing and somehow one of my most treasured ones.<br><br>
+            That's what you do to ordinary moments.
           </p>
         </div>`;
 
@@ -773,7 +743,7 @@ Please take your time to think it over; I'm not expecting an answer right away. 
       case 'days': return `
         <h2 class="a5-card-title">📅 365 Days</h2>
         <div class="a5-card">
-          <div class="a5-days-num" id="a5-days-counter">0</div>
+          <div class="a5-days-num">0</div>
           <p class="a5-days-label">days of choosing each other</p>
           <p class="a5-days-sub">
             365 good mornings.<br>
@@ -783,26 +753,13 @@ Please take your time to think it over; I'm not expecting an answer right away. 
           </p>
         </div>`;
 
-      case 'whatyouare': return `
-        <h2 class="a5-card-title">✨ What You Are</h2>
-        <div class="a5-card">
-          <p class="a5-quote">
-            you're my favorite <em>notification</em>,<br>
-            my <em>2am</em> safe place,<br>
-            my reason to smile<br>
-            at my phone like an idiot.<br><br>
-            you are, simply put,<br>
-            <em>my favorite person.</em>
-          </p>
-        </div>`;
-
       default: return '';
     }
   }
 
   /* ── DAYS COUNTER ── */
   function initDaysCounter() {
-    const el = document.getElementById('a5-days-counter');
+    const el = document.querySelector('.a5-days-num');
     if (!el) return;
     const target   = 365;
     const duration = 6000;
@@ -822,11 +779,8 @@ Please take your time to think it over; I'm not expecting an answer right away. 
         el.style.transition = 'transform 0.2s ease';
         el.style.transform  = 'scale(1.15)';
         setTimeout(() => { el.style.transform = 'scale(1)'; }, 200);
-        // Explode hearts from the counter element
         const rect = el.getBoundingClientRect();
-        const cx   = rect.left + rect.width  / 2;
-        const cy   = rect.top  + rect.height / 2;
-        spawnBurst(cx, cy);
+        spawnBurst(rect.left + rect.width / 2, rect.top + rect.height / 2);
       }
     }
     requestAnimationFrame(tick);
