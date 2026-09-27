@@ -585,7 +585,7 @@ function initAct5(containerId, onDone) {
         <h2 class="a5-card-title">🎨 Us</h2>
         <div class="a5-card">
           <div class="a5-poster-wrap">
-            <img class="a5-poster" src="Img/us.png" alt="Us" style="width:100%;border-radius:16px;" />
+            <img class="a5-poster" src="Img/Us.png" alt="Us" style="width:100%;border-radius:16px;" />
           </div>
           <p class="a5-quote" style="margin-top:20px;">
             you're my favorite <em>notification</em>,<br>
