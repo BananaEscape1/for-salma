@@ -13,7 +13,13 @@ function initAct6(containerId) {
           <p class="a6-anniversary">Happy anniversary, My Lovely Eepy Sou. ❤️</p>
           <p class="a6-from">— Ahmed</p>
         </div>
+        <div id="act6-epilogue" class="hidden">
+          <p class="a6-thanks">thank you for being my favorite part of this year. ❤️</p>
+        </div>
       </div>
+    </div>
+    <div id="act6-finale">
+      <p id="act6-finale-text">Here's to year two.</p>
     </div>
   </div>`;
 
@@ -88,6 +94,11 @@ function initAct6(containerId) {
   }
   #act6-scroll.visible {
     opacity: 1; transform: translateY(0);
+  }
+  /* when the finale takes over, the whole letter dissolves away */
+  #act6-scroll.fade-out {
+    opacity: 0 !important;
+    transition: opacity 2.5s ease;
   }
 
   /* ── LETTER TEXT ── */
@@ -164,6 +175,48 @@ function initAct6(containerId) {
     font-size: clamp(15px, 4vw, 22px);
     color: rgba(200,180,255,0.45);
     text-align: center; margin-top: 4px;
+  }
+
+  /* ── EPILOGUE (inside the card) ── */
+  #act6-epilogue {
+    margin-top: 28px;
+    display: flex; flex-direction: column;
+    align-items: center; gap: 14px;
+  }
+  #act6-epilogue.hidden { display: none; }
+  .a6-thanks {
+    font-family: 'Dancing Script', cursive;
+    font-size: clamp(18px, 5vw, 26px);
+    color: rgba(235, 225, 255, 0.85);
+    text-align: center;
+    opacity: 0; transform: translateY(8px);
+    transition: opacity 1.6s ease, transform 1.6s ease;
+  }
+  .a6-thanks.visible { opacity: 1; transform: translateY(0); }
+
+  /* ── FINALE (full-screen "Here's to year two.") ── */
+  #act6-finale {
+    position: absolute; inset: 0; z-index: 4;
+    display: flex; align-items: center; justify-content: center;
+    padding: 24px;
+    opacity: 0; visibility: hidden;
+    transition: opacity 2.5s ease;
+    pointer-events: none;
+  }
+  #act6-finale.visible {
+    opacity: 1; visibility: visible;
+  }
+  #act6-finale-text {
+    font-family: 'Dancing Script', cursive;
+    font-size: clamp(34px, 9vw, 64px);
+    color: #e8547a;
+    text-align: center; line-height: 1.3;
+    text-shadow:
+      0 0 24px rgba(232,84,122,0.7),
+      0 0 60px rgba(232,84,122,0.4),
+      0 0 120px rgba(232,84,122,0.2);
+    animation: love-pulse 2.5s ease-in-out infinite;
+    letter-spacing: .03em;
   }
   `;
   document.head.appendChild(style);
@@ -311,6 +364,7 @@ function initAct6(containerId) {
 
     `I chose you a year ago. I choose you today. And I will choose you every year that follows, for as long as you'll have me.`,
   ];
+
   /* ══════════════════════════════
      TYPEWRITER
   ══════════════════════════════ */
@@ -318,6 +372,9 @@ function initAct6(containerId) {
   const sigEl    = document.getElementById('act6-signature');
   const introEl  = document.getElementById('act6-intro');
   const scrollEl = document.getElementById('act6-scroll');
+  const epilogueEl = document.getElementById('act6-epilogue');
+  const thanksEl   = epilogueEl.querySelector('.a6-thanks');
+  const finaleEl   = document.getElementById('act6-finale');
 
   let paraIndex = 0;
   let charIndex = 0;
@@ -333,12 +390,36 @@ function initAct6(containerId) {
 
   function nextPara() {
     if (paraIndex >= PARAGRAPHS.length) {
-      /* all paragraphs done — show signature then launch hearts */
+      /* all paragraphs done — show signature, hearts, epilogue, finale */
       if (cursor) cursor.remove();
       setTimeout(() => {
         sigEl.classList.remove('hidden');
         requestAnimationFrame(() => sigEl.classList.add('visible'));
         launchHearts();
+
+        /* ── EPILOGUE: thank-you line inside the card ── */
+        setTimeout(() => {
+          epilogueEl.classList.remove('hidden');
+          requestAnimationFrame(() => thanksEl.classList.add('visible'));
+
+          /* keep it in view */
+          const content = document.getElementById('act6-content');
+          const scrollDist = content.scrollHeight - content.scrollTop - content.clientHeight;
+          if (scrollDist < 150) {
+            content.scrollTop = content.scrollHeight;
+          }
+
+          /* ── FINALE: dissolve the letter, reveal year two ── */
+          setTimeout(() => {
+            /* card (with letter, signature, thanks) dissolves away */
+            scrollEl.classList.add('fade-out');
+
+            /* after the card has mostly dissolved, bring in the finale */
+            setTimeout(() => {
+              finaleEl.classList.add('visible');
+            }, 2500);
+          }, 4000);
+        }, 6500);
       }, 600);
       return;
     }
@@ -377,14 +458,14 @@ function initAct6(containerId) {
           strongEl.textContent = boldText;
           currentParaEl.insertBefore(strongEl, cursor);
           charIndex = endIdx + 1;
-          
+
           /* only auto-scroll if near bottom */
           const content = document.getElementById('act6-content');
           const scrollDist = content.scrollHeight - content.scrollTop - content.clientHeight;
           if (scrollDist < 150) {
             content.scrollTop = content.scrollHeight;
           }
-          
+
           setTimeout(typeChar, getDelay());
           return;
         }

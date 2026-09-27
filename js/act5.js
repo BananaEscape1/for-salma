@@ -25,6 +25,7 @@ function initAct5(containerId, onDone) {
       <h2 class="a5-title">pick a gift ♥</h2>
       <div id="act5-grid"></div>
       <div id="act5-unlock" class="a5-unlock hidden">
+        <p class="a5-unlock-msg">you've opened every memory I wanted to keep...<br>but I saved one thing for last.</p>
         <button id="act5-unlock-btn">one more thing... →</button>
       </div>
     </div>
@@ -145,8 +146,16 @@ function initAct5(containerId, onDone) {
   }
 
   /* ── UNLOCK ── */
-  .a5-unlock { margin-top: 6px; transition: opacity .6s ease; }
+  .a5-unlock { margin-top: 6px; transition: opacity .6s ease; display: flex; flex-direction: column; align-items: center; gap: 14px; }
   .a5-unlock.hidden { opacity: 0; pointer-events: none; }
+  .a5-unlock-msg {
+    font-family: 'Dancing Script', cursive;
+    font-size: clamp(16px, 4.5vw, 22px);
+    color: rgba(200,150,255,0.85);
+    text-align: center;
+    line-height: 1.6;
+    text-shadow: 0 0 12px rgba(200,150,255,0.3);
+  }
   #act5-unlock-btn {
     background: linear-gradient(135deg, #e8547a, #c94070);
     color: white; border: none; border-radius: 40px;
