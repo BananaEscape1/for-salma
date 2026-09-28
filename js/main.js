@@ -42,6 +42,8 @@ function startAct5() {
 }
 
 function startAct6() {
+  const act6 = document.getElementById('act-6');
+  act6.style.background = '#050510';   // ← add this
   switchAct('act-5', 'act-6');
   setTimeout(() => {
     initAct6('act-6');
