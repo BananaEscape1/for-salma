@@ -612,11 +612,12 @@ function initAct5(containerId, onDone) {
           <div class="a5-screenshot" style="margin-bottom:16px;">
             <img src="Img/biscuit.png" alt="The biscuit" />
           </div>
-          <p class="a5-card-body">
-            You sent me this like it was nothing.<br><br>
+          <p class="a5-quote" style="margin-top:4px;">
+            you sent me this like it was <em>nothing</em>.<br>
             I've had it saved as a favorite ever since.<br><br>
-            It's the smallest thing and somehow one of my most treasured ones.<br><br>
-            That's what you do to ordinary moments.
+            it's the smallest thing and somehow<br>
+            one of my most treasured ones.<br><br>
+            that's what you do to <em>ordinary moments</em>.
           </p>
         </div>`;
 
@@ -629,8 +630,9 @@ function initAct5(containerId, onDone) {
           <div class="a5-screenshot">
             <img src="Img/first-msg.jpg" alt="first message" />
           </div>
-          <p class="a5-card-body" style="margin-top:14px;font-style:italic;opacity:0.6;">
-            who knew "wanna listen to this?" would lead to all of this?
+          <p class="a5-quote" style="margin-top:16px;">
+            who knew <em>"wanna listen to this?"</em><br>
+            would lead to all of this?
           </p>
         </div>`;
 
@@ -757,8 +759,8 @@ Please take your time to think it over; I'm not expecting an answer right away. 
           <p class="a5-days-sub">
             365 good mornings.<br>
             365 good nights.<br>
-            365 reasons to be grateful<br>
-            it was you.
+            and every single one of them better<br>
+            because it was you.
           </p>
         </div>`;
 

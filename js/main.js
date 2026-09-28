@@ -42,10 +42,21 @@ function startAct5() {
 }
 
 function startAct6() {
-  const act6 = document.getElementById('act-6');
-  act6.style.background = '#050510';   // ← add this
-  switchAct('act-5', 'act-6');
+  const dissolve = document.getElementById('dissolve');
+
+  // 1 — fade to dark
+  dissolve.classList.add('visible');
+
   setTimeout(() => {
-    initAct6('act-6');
-  }, 600);
+    // 2 — swap acts while dark
+    switchAct('act-5', 'act-6');
+
+    setTimeout(() => {
+      // 3 — build act 6 behind the curtain
+      initAct6('act-6');
+
+      // 4 — lift the curtain almost immediately; aurora finishes while visible
+      setTimeout(() => dissolve.classList.remove('visible'), 400);
+    }, 950);
+  }, 950);
 }
