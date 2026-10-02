@@ -60,7 +60,7 @@ function initAct4(containerId, onDone) {
     <!-- PART B payoff -->
     <div id="act4-payoff">
       <img class="payoff-gif" src="Img/peach-and-goma-peach-loves-goma.gif" alt="Peach and Goma in love" />
-      <p class="payoff-text">♥ I love you babe ♥</p>
+      <p class="payoff-text">♥ I love you, Sou. Always have. Always will. ♥</p>
       <button id="act4-next">keep going →</button>
     </div>
 
