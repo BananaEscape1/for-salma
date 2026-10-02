@@ -571,7 +571,7 @@ function initAct4(containerId, onDone) {
       dialog.style.display = '';
       dialog.style.opacity = '1';
       dialog.style.transform = 'scale(1)';
-    }, 5000);
+    }, 3000);
   }
 
   // YES fires
